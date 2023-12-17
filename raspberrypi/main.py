@@ -5,6 +5,8 @@ import io
 from picamera2 import Picamera2
 from libcamera import controls
 
+IP_ADDRESS = "YOUR-WS-SERVER-ADDRESS"
+
 # Initialize Camera 
 picam2 = Picamera2()
 picam2.start()
@@ -12,7 +14,7 @@ picam2.set_controls({"AfMode": controls.AfModeEnum.Continuous}) # Auto-Focus
 
 async def stream():
 	# Connect to the server's websocket
-	async with websockets.connect("YOUR-SERVER-IP") as websocket:
+	async with websockets.connect(IP_ADDRESS) as websocket:
 		# Upon connection send client's role/class
 		await websocket.send(b"rpi")
 
