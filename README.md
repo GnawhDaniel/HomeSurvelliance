@@ -75,10 +75,11 @@ To install and run, follow these steps:
     - Then on the Raspberry Pi manually replace the IP_ADDRESS variable with the copied address as well.
 
 5. **Setting Up Gmail App Credentials**
+    - Please do not share Google App password with anyone!
     - Navigate to the [Google's App Setup Guide](https://support.google.com/mail/answer/185833?hl=en) and follow the instructions.
     - In the .env file in the server directory, write the application email and password into their respective fields.
 
-6. **Running the System**
+7. **Running the System**
     - Ensure server.py script is running.
     - Navigate the to website directory, and type `npm run dev` to launch website.
     - Run python script on the Raspberry Pi via SSH terminal using `python3 main.py`
