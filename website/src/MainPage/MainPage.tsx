@@ -1,7 +1,10 @@
 import { useState } from "react";
 import styles from "./MainPage.module.css";
+// import dotenv from 'dotenv';
 
-const WS_URL = "ws://ENTER-SERVER-IP-ADDRESS-HERE";
+// dotenv.config({ path: '../.env' });
+
+const WS_URL = import.meta.env.VITE_SERVER_URL;
 const ws = new WebSocket(WS_URL);
 
 
