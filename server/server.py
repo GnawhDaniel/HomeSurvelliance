@@ -6,10 +6,14 @@ import asyncio
 import socket
 import io
 import smtplib
+import os
+from dotenv import load_dotenv
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 import threading
+
+load_dotenv()
 
 NOTIFICATION_FREQ = 60 # seconds
 LAST_NOTIFIED = datetime.now() - timedelta(seconds=NOTIFICATION_FREQ) 
@@ -39,9 +43,8 @@ class Email:
 
 # Function to send emails to emails in notify_emails
 def send_emails(img):
-    # TODO: make a .conf file
-    EMAIL = "ENTER-GMAIL-ACCOUNT"
-    PASSWORD = "GMAIL-ACCOUNT-APP-PASSWORD"
+    EMAIL = os.getenv('EMAIL_ADDR')
+    PASSWORD = os.getenv('APP_PASSWD')
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
     server.login(EMAIL, PASSWORD)
@@ -148,8 +151,10 @@ if __name__ == "__main__":
     
     host_name = socket.gethostname()
     ip_addresses = socket.gethostbyname_ex(host_name)
-    print(ip_addresses)
-    print(ip_addresses[2][-1])
+    # print(ip_addresses)
+
+    # Print Server Address
+    print(f"ws://{ip_addresses[2][-1]}:5000")
 
     # List to keep track of connected clients
     connected_clients = set()
@@ -160,7 +165,7 @@ if __name__ == "__main__":
     # Start the WebSocket server
     start_server = websockets.serve(websocket_handler, ip_addresses[2][-1], 5000)
 
-    print("Listening to port 5000")
+    # print("Listening to port 5000")
 
     # Run the server indefinitely
     asyncio.get_event_loop().run_until_complete(start_server)
