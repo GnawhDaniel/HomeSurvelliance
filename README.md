@@ -18,14 +18,68 @@ The primary goal of this project is to demonstrate the effective application of 
 - RAM: 32 GB
 
 
-*Note: Other camera iterations can be used. But the code in this repository uses the picamera 2 library.*
+*Note: Other camera modules can be used. But the code in this repository uses the picamera 2 library.*
 
-## Installation (PC)
-Under construction
+## Installation
+To install and run, follow these steps:
 
-## Usage
-Under construction
+1. **Clone the Repository**
+    - Open your terminal.
+    - Clone the repository using Git:
+      ```
+      git clone git@github.com:GnawhDaniel/Home-Security-Camera.git
+      ```
+    - Navigate to the cloned directory:
+      ```
+      cd Home-Security-Camera
+      ```
+2. **Setting up Prerequisites**
+    - Install [Conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
+    - Create new conda environment.
+      ```
+      conda create -n [env-name] python=3.11.5
+      conda activate [env-name]
+      ```
+    - Install [PyTorch](https://pytorch.org/get-started/locally/).
+    - Install ultraltytics and websockets library.
+      ```
+      conda install -c conda-forge ultralytics websockets
+      ```
+    - Install necessary packages for launching the website.
+      ```
+      cd website
+      npm i
+      ```
 
-## License
+3. **Raspberry Pi Set-up**
+    - Insert Camera Module into CSI slot.
+    - Flash Raspberry Pi OS to Raspberry Pi using the [Raspberry Pi Imager](https://www.raspberrypi.com/software/).
+    - SSH into the RPI terminal and update software.
+      ```
+      sudo apt update && sudo apt upgrade
+      ```
+    - Install websockets library.
+      ```
+      sudo apt install python3-websockets
+      ```
+    - Then create a new python file and copy the [Raspberry Pi Code](https://github.com/GnawhDaniel/Home-Security-Camera/blob/main/raspberrypi/main.py) into the file.
 
-[MIT](https://choosealicense.com/licenses/mit/)
+4. **Obtaining IP Address and Setting Up Endpoints**
+    - Run server.py script.
+      ```
+      cd server
+      python server.py
+      ```
+    - Copy the address printed in the terminal (ws://[IP-Address]:5000).
+    - Navigate to .env file in website/.env and replace the value in VITE_SERVER_URL with the copied ip address.
+    - Then on the Raspberry Pi manually replace the IP_ADDRESS variable with the copied address as well.
+
+5. **Setting Up Email App Credentials**
+    - Navigate to the [Google's App Setup Guide](https://support.google.com/mail/answer/185833?hl=en) and follow the instructions.
+    - In the .env file in the root directory, write the application email and password into their respective fields.
+
+6. **Running the System**
+    - Ensure server.py script is running.
+    - Navigate the to website directory, and type `npm run dev` to launch website.
+    - Run python script on the Raspberry Pi via SSH terminal using `python3 main.py`
+    - The live stream from the Raspberry Pi camera should now be viewable on the website.
