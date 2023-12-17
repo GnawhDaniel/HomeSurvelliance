@@ -41,9 +41,9 @@ To install and run, follow these steps:
       conda activate [env-name]
       ```
     - Install [PyTorch](https://pytorch.org/get-started/locally/).
-    - Install ultraltytics and websockets library.
+    - Install necessary libraries.
       ```
-      conda install -c conda-forge ultralytics websockets
+      conda install -c conda-forge ultralytics websockets python-dotenv
       ```
     - Install necessary packages for launching the website.
       ```
@@ -74,9 +74,9 @@ To install and run, follow these steps:
     - Navigate to .env file in website/.env and replace the value in VITE_SERVER_URL with the copied ip address.
     - Then on the Raspberry Pi manually replace the IP_ADDRESS variable with the copied address as well.
 
-5. **Setting Up Email App Credentials**
+5. **Setting Up Gmail App Credentials**
     - Navigate to the [Google's App Setup Guide](https://support.google.com/mail/answer/185833?hl=en) and follow the instructions.
-    - In the .env file in the root directory, write the application email and password into their respective fields.
+    - In the .env file in the server directory, write the application email and password into their respective fields.
 
 6. **Running the System**
     - Ensure server.py script is running.
